@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+aws-cdk-lib = "==2.10.0"
+constructs = ">=10.0.0,<11.0.0"
+validated-dc = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
+
+[scripts]
+deploy = "cdk deploy --all"
+destroy = "cdk destroy --all"
+synth = "cdk synth --no-version-reporting"
