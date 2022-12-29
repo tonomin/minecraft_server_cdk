@@ -46,7 +46,7 @@ class NatInstance(Resource):
                 'iam_instance_profile': iam_role.instance_profile_general_ec2.ref,
                 'resource_name': 'EC2-NatIns-1a',
                 # Nat Instance
-                'image_id': 'ami-0cc6fa590dc4d36eb',
+                'image_id': 'ami-0a09a4184fb0fdc72',
                 'instance_type': 't2.micro',
                 'source_dest_check': False,
                 'subnet_id': subnet_public_1a.ref,

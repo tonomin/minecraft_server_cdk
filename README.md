@@ -4,6 +4,8 @@
 Minecraft ServerをAWS上に作成するCDKプロジェクトです。
 以下のネットワーク・サーバ環境を構築します。
 
+AWSのリージョンは`ap-notheast-1`を想定しています。
+
 ※2022/12/20時点でAnsibleサーバは一旦利用しないので作成されないようにしています
 
 ![minecraft_server](docs/minecraft_server.jpg "minecraft_server")

@@ -60,7 +60,7 @@ class Ec2(Resource):
                 'iam_instance_profile': iam_role.instance_profile_general_ec2.ref,
                 'resource_name': 'EC2-Minecraft-1a',
                 # Alma Linux 8
-                'image_id': 'ami-06dc00dc1e3a0b0f6',
+                'image_id': 'ami-0b299c22ffb336d85',
                 'instance_type': 't3.small',
                 'subnet_id': subnet.public_1a.ref,
                 'security_group_id': security_group.minecraft.ref,
