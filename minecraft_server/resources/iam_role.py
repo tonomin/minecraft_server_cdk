@@ -35,7 +35,10 @@ class IAMRole(Resource):
                     'principals': [iam.ServicePrincipal('ec2.amazonaws.com')],
                     'actions': ['sts:AssumeRole'],
                 },
-                'managed_policy_arns': ['arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore'],
+                'managed_policy_arns': [
+                    'arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore',
+                    'arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy'
+                    ],
                 'resource_name': 'Role-GeneralEc2',
                 '_assign_name': 'general_ec2',
                 'instance_profile_id': 'InstanceProfileGeneralEc2',
@@ -51,7 +54,8 @@ class IAMRole(Resource):
                 # MinecraftServiceEc2PemAccess は事前に作成済み（EC2のキーペア取得用）
                 'managed_policy_arns': [
                     'arn:aws:iam::aws:policy/AmazonSSMFullAccess',
-                    'arn:aws:iam::{}:policy/MinecraftServiceEc2PemAccess'.format(account)],
+                    'arn:aws:iam::{}:policy/MinecraftServiceEc2PemAccess'.format(account)
+                    ],
                 'resource_name': 'Role-AnsibleEc2',
                 '_assign_name': 'ansible_ec2',
                 'instance_profile_id': 'InstanceProfileAnsibleEc2',

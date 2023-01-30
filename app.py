@@ -8,6 +8,9 @@ from minecraft_server.stacks import (
     VpcStack,
     IAMStack,
     Ec2Stack,
+    SNSStack,
+    BudgetStack,
+
 )
 
 app = cdk.App()
@@ -27,6 +30,20 @@ vpc_stack = VpcStack(app, "VpcStack", iam_stack,
 )
 
 ec2_stack = Ec2Stack(app, "Ec2Stack", vpc_stack, iam_stack,
+    env=cdk.Environment(
+        account=os.getenv('CDK_DEFAULT_ACCOUNT'), 
+        region=os.getenv('CDK_DEFAULT_REGION')
+        ),
+)
+
+sns_stack = SNSStack(app, 'SNSStack',
+    env=cdk.Environment(
+        account=os.getenv('CDK_DEFAULT_ACCOUNT'), 
+        region=os.getenv('CDK_DEFAULT_REGION')
+        ),
+)
+
+budget_stack = BudgetStack(app, 'BudgetStack', sns_stack,
     env=cdk.Environment(
         account=os.getenv('CDK_DEFAULT_ACCOUNT'), 
         region=os.getenv('CDK_DEFAULT_REGION')
