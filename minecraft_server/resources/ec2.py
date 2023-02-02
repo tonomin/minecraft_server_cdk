@@ -65,7 +65,7 @@ class Ec2(Resource):
                 'subnet_id': subnet.public_1a.ref,
                 'security_group_id': security_group.minecraft.ref,
                 'eip_id': elastic_ip.minecraft_1a.ref,
-                'user_data_path': './scripts/minecraft/userData.sh',
+                'user_data_path': './scripts/userdata/minecraft.sh',
                 '_assign_name': 'minecraft-1a'
             },
         ]

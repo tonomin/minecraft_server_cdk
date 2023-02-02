@@ -69,7 +69,7 @@ class Budget(Resource):
                         'notification': {
                             'comparison_operator': 'GREATER_THAN',
                             'notification_type': 'ACTUAL',
-                            'threshold': 30,
+                            'threshold': 1,
                             'threshold_type': 'PERCENTAGE',
                         },
                         'subscribers': [

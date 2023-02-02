@@ -19,3 +19,6 @@ from .sns import SNS
 
 # Budget Stack
 from .budget import Budget
+
+# Lambda Stack
+from .lambda_ import Lambda

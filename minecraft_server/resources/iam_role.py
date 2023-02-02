@@ -61,6 +61,21 @@ class IAMRole(Resource):
                 'instance_profile_id': 'InstanceProfileAnsibleEc2',
                 '_instance_profile_assign_name': 'instance_profile_ansible_ec2',
             },
+            {
+                'id': 'RoleBasicLambdaExection',
+                'policy_statement_info': {
+                    'effect': iam.Effect.ALLOW,
+                    'principals': [iam.ServicePrincipal('lambda.amazonaws.com')],
+                    'actions': ['sts:AssumeRole'],
+                },
+                'managed_policy_arns': [
+                    'arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole',
+                ],
+                'resource_name': 'Role-BasicLambdaExection',
+                '_assign_name': 'basic_lambda_exection',
+                'instance_profile_id': '',
+                '_instance_profile_assign_name': '',
+            },
         ]
 
         self.resources = [ResourceInfo(**resource) for resource in self._resources]
@@ -70,15 +85,16 @@ class IAMRole(Resource):
             role = self.__create_role(scope, resource_info)
             setattr(self, resource_info._assign_name, role)
 
-            instance_profile = iam.CfnInstanceProfile(
-                scope,
-                resource_info.instance_profile_id,
-                roles=[role.ref],
-                instance_profile_name=role.role_name
+            if(resource_info.instance_profile_id):
+                instance_profile = iam.CfnInstanceProfile(
+                    scope,
+                    resource_info.instance_profile_id,
+                    roles=[role.ref],
+                    instance_profile_name=role.role_name
                 )
-            setattr(self, resource_info._instance_profile_assign_name, instance_profile)
+                setattr(self, resource_info._instance_profile_assign_name, instance_profile)
 
-    def __create_role(self, scope: Construct, resource_info: ResourceInfo) -> iam.PolicyStatement:
+    def __create_role(self, scope: Construct, resource_info: ResourceInfo) -> iam.CfnRole:
         policy_statement = iam.PolicyStatement(
             effect=resource_info.policy_statement_info.effect,
             principals=resource_info.policy_statement_info.principals,

@@ -10,7 +10,7 @@ from minecraft_server.stacks import (
     Ec2Stack,
     SNSStack,
     BudgetStack,
-
+    LambdaStack,
 )
 
 app = cdk.App()
@@ -44,6 +44,13 @@ sns_stack = SNSStack(app, 'SNSStack',
 )
 
 budget_stack = BudgetStack(app, 'BudgetStack', sns_stack,
+    env=cdk.Environment(
+        account=os.getenv('CDK_DEFAULT_ACCOUNT'), 
+        region=os.getenv('CDK_DEFAULT_REGION')
+        ),
+)
+
+lambda_stack = LambdaStack(app, 'LambdaStack', iam_stack, sns_stack,
     env=cdk.Environment(
         account=os.getenv('CDK_DEFAULT_ACCOUNT'), 
         region=os.getenv('CDK_DEFAULT_REGION')
